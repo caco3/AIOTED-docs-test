@@ -29,8 +29,6 @@ jobs:
           mkdocs gh-deploy
 
 
-
-
   #########################################################################################
   ## Update the Web Installer on a release
   #########################################################################################
@@ -67,3 +65,17 @@ jobs:
       uses: actions/deploy-pages@v1
 
 
+  #########################################################################################
+  ## Delete the gh-pages branch again
+  #########################################################################################
+  remove-gh-pages-branch-again:
+    needs: [update-github-pages]
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Delete gh-pages branche again
+      uses: dawidd6/action-delete-branch@v3
+      with:
+        github_token: ${{github.token}}
+        branches: gh-pages
